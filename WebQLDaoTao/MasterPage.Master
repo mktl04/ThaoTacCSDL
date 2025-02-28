@@ -49,7 +49,7 @@
                 <div class="col-md-3">
                     <div class="list-group">
                         <a href="#" class="list-group-item active">CHỨC NĂNG CHÍNH</a>
-                        <a href="QLMH.aspx" class="list-group-item"><i class="bi bi-card-checklist"></i>Quản lý môn học</a>
+                        <a href="QLMH.aspx" class="list-group-item"><span class="bi bi-card-checklist"></span>Quản lý môn học</a>
                         <a href="QLK.aspx" class="list-group-item"><span class="glyphicon glyphicon-book"></span>Quản lý khoa</a>
                         <a href="QLSV.aspx" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Quản lý sinh viên</a>
                         <a href="#" class="list-group-item"><span class="glyphicon glyphicon-edit"></span>Quản lý điểm</a>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <footer class="container-fluid text-center">
-            <p>Sinh thực hiện: MSSV - HOTEN</p>
+            <p>Sinh thực hiện: 2321160002 - Nguyễn Lê Minh Khôi</p>
         </footer>
     </form>
 </body>

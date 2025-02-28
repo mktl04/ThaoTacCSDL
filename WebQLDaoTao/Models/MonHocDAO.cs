@@ -4,89 +4,66 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
+
 namespace WebQLDaoTao.Models
 {
     public class MonHocDAO
     {
+        //Đọc tất cả môn học
         public List<MonHoc> getAll()
         {
-            List<MonHoc> dsMonHoc = new List<MonHoc>();
-            //1.Mo ket noi CSDL
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["QLDaoTao_ConStr"].ConnectionString);
-            conn.Open();
-            //2.tao truy van
-            SqlCommand cmd = new SqlCommand("select * from Monhoc", conn);
-            //3.thuc thi ket qua;
-            SqlDataReader dr = cmd.ExecuteReader();
-            //4.xu ly ket qua tra ve
-            while (dr.Read())
-            {
-                //tao doi tuong mon hoc
-                MonHoc mh = new MonHoc
-                {
-                    MaMH = dr["MaMH"].ToString(),
-                    TenMH = dr["TenMH"].ToString(),
-                    SoTiet = int.Parse(dr["SoTiet"].ToString())
-                };
+            List<MonHoc> ds = new List<MonHoc>();
 
-                //add vao dsMonHoc
-                dsMonHoc.Add(mh);
-            }
-            return dsMonHoc;
-        }
-        public int Update(string mamh, string tenmh, int sotiet)
-        {
-            //1.Mo ket noi CSDL
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
-            //2.tao truy van
-            SqlCommand cmd = new SqlCommand("update monhoc set tenmh=@tenmh, sotiet=@sotiet wheremamh = @mamh", conn);
-            cmd.Parameters.AddWithValue("@tenmh", tenmh);
-            cmd.Parameters.AddWithValue("@sotiet", sotiet);
-            cmd.Parameters.AddWithValue("@mamh", mamh);
+            SqlCommand cmd = new SqlCommand("select * from monhoc", conn);
+            SqlDataReader rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                ds.Add(new MonHoc()
+                {
+                    MaMH = rd["MaMH"].ToString(),
+                    TenMH = rd["TenMH"].ToString(),
+                    SoTiet = int.Parse(rd["SoTiet"].ToString())
+                });
+            }
+
+            return ds;
+        }
+
+        //Thêm môn học
+        public int Insert(MonHoc mh)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("insert into monhoc values(@MaMH, @TenMH, @SoTiet)", conn);
+            cmd.Parameters.AddWithValue("MaMH", mh.MaMH);
+            cmd.Parameters.AddWithValue("TenMH", mh.TenMH);
+            cmd.Parameters.AddWithValue("SoTiet", mh.SoTiet);
             return cmd.ExecuteNonQuery();
         }
+
+        //Sửa môn học
+        public int Update(MonHoc mh)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("update monhoc set TenMH = @TenMH, SoTiet = @SoTiet where MaMH = @MaMH", conn);
+            cmd.Parameters.AddWithValue("MaMH", mh.MaMH);
+            cmd.Parameters.AddWithValue("TenMH", mh.TenMH);
+            cmd.Parameters.AddWithValue("SoTiet", mh.SoTiet);
+            return cmd.ExecuteNonQuery();
+        }
+
+        //Xóa môn học
         public int Delete(string mamh)
         {
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("delete from monhoc where mamh=@mamh", conn);
-            cmd.Parameters.AddWithValue("@mamh", mamh);
+            SqlCommand cmd = new SqlCommand("delete from monhoc where MaMH = @MaMH", conn);
+            cmd.Parameters.AddWithValue("MaMH", mamh);
             return cmd.ExecuteNonQuery();
         }
-        public int Insert(string mamh, string tenmh, int sotiet)
-        {
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("insert into monhoc (mamh, tenmh,sotiet) values (@mamh,@tenmh,@sotiet)", conn);
-            cmd.Parameters.AddWithValue("@mamh", mamh);
-            cmd.Parameters.AddWithValue("@tenmh", tenmh);
-            cmd.Parameters.AddWithValue("@sotiet", sotiet);
-            return cmd.ExecuteNonQuery();
-        }
-        public MonHoc findById(string mamh)
-        {
-            MonHoc kq = null;
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("select * from Monhoc where mamh=@mamh", conn);
-            cmd.Parameters.AddWithValue("@mamh", mamh);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
-                kq = new MonHoc
-                {
-                    MaMH = dr["MaMH"].ToString(),
-                    TenMH = dr["TenMH"].ToString(),
-                    SoTiet = int.Parse(dr["SoTiet"].ToString())
-                };
-            }
-            return kq;
-        }
+        //Lấy môn học theo mã môn học
     }
 }

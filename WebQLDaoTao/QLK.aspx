@@ -1,65 +1,57 @@
-﻿<%@ Page Title="Trang trị danh mục khoa" Language="C#" MasterPageFile="~/MasterPage.Master"
-    AutoEventWireup="true" CodeBehind="QLK.aspx.cs" Inherits="WebQLDaoTao.QLK" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+﻿﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QLK.aspx.cs" Inherits="WebQLDaoTao.QLKhoa" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
-    <h2>TRANG QUẢN TRỊ KHOA </h2>
-    <hr />
-    <h4>THÊM MỚI KHOA</h4>
-    <hr>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="control-label col-sm-2">Mã khoa:</label>
-            <div class="col-sm-10">
-                <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control"></asp:TextBox>
+    <h3>Giao diện trang quản lý khoa</h3>
+     <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm khoa</button>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm khoa</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="txtMaMH" class="col-sm-2 col-form-label">Mã khoa</label>
+                        <div class="col-sm-6">
+                            <asp:TextBox ID="txtMaKH" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="txtTenMon" class="col-sm-2 col-form-label">Tên khoa</label>
+                        <div class="col-sm-6">
+                            <asp:TextBox ID="txtTenKH" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="btXuLy" OnClick="btXuLy_Click" runat="server" Text="Lưu" CssClass="btn btn-primary" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2">Tên khoa</label>
-            <div class="col-sm-10">
-                <asp:TextBox ID="txtTenKH" runat="server" CssClass="form-control"></asp:TextBox>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <asp:Button ID="btThem" runat="server" Text="Thêm" CssClass="btn btn-info" />
-            </div>
-        </div>
-
-        <asp:Label ID="lbThongBao" ForeColor="#cc3300" runat="server"
-            Text=""></asp:Label>
     </div>
-    <div>
-        <h4>DANH SÁCH CÁC KHOA</h4>
-        <hr>
-        <asp:GridView ID="gvKhoa" CssClass="table table-bordered" runat="server"
-            AutoGenerateColumns="false">
-            <Columns>
-                <asp:BoundField HeaderText="Mã khoa" DataField="MaKH" />
-                <asp:BoundField HeaderText="Tên khoa" DataField="TenKH" />
-                <asp:TemplateField HeaderText="Chọn tác vụ">
-                    <ItemTemplate>
-                        <asp:Button ID="btEdit" CommandName="Edit" runat="server"
-                            Text="Sửa" CssClass="btn btn-success" />
-                        <asp:Button ID="btDelete" CommandName="Delete" runat="server"
-                            OnClientClick="return confirm('Bạn có chắc muốn xóa môn học?')" Text="Xóa" CssClass="btnbtn-danger" />
-                    </ItemTemplate>
-                    <EditItemTemplate>
-
-                        <asp:Button ID="btUpdate" CommandName="Update" runat="server"
-                            Text="Ghi" CssClass="btn btn-primary" />
-                        <asp:Button ID="btCancel" CommandName="Cancel" runat="server"
-                            Text="Không" CssClass="btn btn-warning" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-            <HeaderStyle BackColor="#99ccff" />
-        </asp:GridView>
-        <asp:ObjectDataSource ID="odsKhoa" runat="server" SelectMethod="getAll" TypeName="WebQLDaoTao.Models.KhoaDAO" DataObjectTypeName="WebQLDaoTao.Models.Khoa" UpdateMethod="Update" DeleteMethod="Delete">
-            <DeleteParameters>
-                <asp:Parameter Name="MaKH" Type="String" />
-            </DeleteParameters>
-        </asp:ObjectDataSource>
-    </div>
+     <asp:GridView ID="gvKhoa" runat="server" AutoGenerateColumns="False" CssClass="table table-border table-hover" DataSourceID="odsKhoa"
+         AllowPaging="True" PageSize="5" DataKeyNames="MaKH" >
+         <Columns>
+             <asp:BoundField DataField="MaKH" HeaderText="Mã khoa" ReadOnly="true" SortExpression="MaKH"/>
+             <asp:BoundField DataField="TenKh" HeaderText="Tên khoa" SortExpression="TenKh" />
+             <asp:CommandField ShowEditButton="true" ButtonType="Button" EditText="Sửa"
+                    ShowDeleteButton="true" DeleteText="Xóa"  HeaderText="Chọn tác vụ"/>
+         </Columns>
+          <HeaderStyle BackColor="#003399" ForeColor="#ffffff" />
+         <PagerStyle CssClass="pagination-ys" HorizontalAlign="Center" />
+    </asp:GridView>
+    <asp:ObjectDataSource ID="odsKhoa" runat="server"
+        SelectMethod="getAll"
+        TypeName="WebQLDaoTao.Models.KhoaDAO"
+        DataObjectTypeName="WebQLDaoTao.Models.Khoa" 
+        UpdateMethod="Update"
+        DeleteMethod="Delete"
+        InsertMethod="Insert">
+    </asp:ObjectDataSource>
 </asp:Content>

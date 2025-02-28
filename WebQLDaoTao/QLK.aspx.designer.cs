@@ -11,7 +11,7 @@ namespace WebQLDaoTao
 {
 
 
-    public partial class QLK
+    public partial class QLKhoa
     {
 
         /// <summary>
@@ -33,22 +33,13 @@ namespace WebQLDaoTao
         protected global::System.Web.UI.WebControls.TextBox txtTenKH;
 
         /// <summary>
-        /// btThem control.
+        /// btXuLy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btThem;
-
-        /// <summary>
-        /// lbThongBao control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbThongBao;
+        protected global::System.Web.UI.WebControls.Button btXuLy;
 
         /// <summary>
         /// gvKhoa control.

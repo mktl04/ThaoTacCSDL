@@ -1,66 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using System.Data.SqlClient;
-using System.Configuration;
+
 namespace WebQLDaoTao.Models
 {
     public class KhoaDAO
     {
+        //Đọc tất cả khoa
         public List<Khoa> getAll()
         {
-            List<Khoa> dsKhoa = new List<Khoa>();
-            SqlConnection conn = new
-            SqlConnection(ConfigurationManager.ConnectionStrings["QLDaoTao_ConStr"].ConnectionString);
+            List<Khoa> ds = new List<Khoa>();
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
             SqlCommand cmd = new SqlCommand("select * from Khoa", conn);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            SqlDataReader rd = cmd.ExecuteReader();
+            while (rd.Read())
             {
-                Khoa kh = new Khoa
+                ds.Add(new Khoa()
                 {
-                    MaKH = dr["MaKH"].ToString(),
-                    TenKH = dr["TenKH"].ToString()
-                };
-                dsKhoa.Add(kh);
+                    MaKH = rd["makh"].ToString(),
+                    TenKH = rd["tenkh"].ToString(),
+                   
+                });
             }
-            return dsKhoa;
+
+            return ds;
         }
-        public int Update(string makh, string tenkh)
+
+        //Thêm khoa
+        public int Insert(Khoa kh)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("update khoa set tenkh=@tenkh where makh=@makh", conn);
-            cmd.Parameters.AddWithValue("@tenkh", tenkh);
-            cmd.Parameters.AddWithValue("@makh", makh);
+            SqlCommand cmd = new SqlCommand("insert into Khoa(makh,tenkh) values (@makh,@tenkh)", conn);
+            cmd.Parameters.AddWithValue("@tenkh", kh.TenKH);
+            cmd.Parameters.AddWithValue("@makh", kh.MaKH);
             return cmd.ExecuteNonQuery();
         }
-        public int Delete(string makh)
+
+        //Sửa khoa
+        public int Update(Khoa kh)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("update Khoa set tenkh = @tenkh where makh = @makh", conn);
+            cmd.Parameters.AddWithValue("@tenkh", kh.TenKH);
+            cmd.Parameters.AddWithValue("@makh", kh.MaKH);
+            return cmd.ExecuteNonQuery();
+        }
+
+        //Xóa khoa
+        public int Delete(Khoa kh)
         {
             try
             {
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionStringName"].ConnectionString);
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("delete from khoa where makh=@makh", conn);
-                cmd.Parameters.AddWithValue("@makh", makh);
+                SqlCommand cmd = new SqlCommand("delete from Khoa where makh = @makh", conn);
+                cmd.Parameters.AddWithValue("@makh",kh.MaKH );
                 return cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
+            }catch (Exception ex)
             {
                 return 0;
             }
-
         }
-        public int Insert(string makh, string tenkh)
-        {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["WebQLDaoTao_ConStr"].ConnectionString);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("insert into khoa (makh, tenkh) values (@makh,@tenkh)", conn);
-            cmd.Parameters.AddWithValue("@makh", makh);
-            cmd.Parameters.AddWithValue("@tenkh", tenkh);
-            return cmd.ExecuteNonQuery();
-        }
+        //Lấy môn học theo mã môn học
         public Khoa findById(string makh)
         {
             Khoa kq = null;
@@ -80,5 +88,6 @@ namespace WebQLDaoTao.Models
             }
             return kq;
         }
+
     }
 }

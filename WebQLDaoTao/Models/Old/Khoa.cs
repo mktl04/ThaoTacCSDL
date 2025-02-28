@@ -7,7 +7,7 @@ namespace WebQLDaoTao.Models
 {
     public class Khoa
     {
-        public string MaKH { get; set; }
-        public string TenKH { get; set; }
+        public string MaKH { set; get; }
+        public string TenKH { set; get; }
     }
 }

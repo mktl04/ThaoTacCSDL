@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebQLDaoTao
+namespace WebQLDaoTao.Models
 {
     public class MonHoc
     {
-        public string MaMH { get; set; }
-        public string TenMH { get; set; }
-        public int SoTiet { get; set; }
+        public string MaMH { set; get; }
+        public string TenMH { set; get; }
+        public int SoTiet { set; get; }
     }
 }
