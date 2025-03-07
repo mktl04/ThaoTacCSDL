@@ -49,10 +49,10 @@
                 <div class="col-md-3">
                     <div class="list-group">
                         <a href="#" class="list-group-item active">CHỨC NĂNG CHÍNH</a>
-                        <a href="QLMH.aspx" class="list-group-item"><span class="bi bi-card-checklist"></span>Quản lý môn học</a>
+                        <a href="QLMH.aspx" class="list-group-item"><span class="glyphicon glyphicon-book"></span>Quản lý môn học</a>
                         <a href="QLK.aspx" class="list-group-item"><span class="glyphicon glyphicon-book"></span>Quản lý khoa</a>
                         <a href="QLSV.aspx" class="list-group-item"><span class="glyphicon glyphicon-user"></span>Quản lý sinh viên</a>
-                        <a href="#" class="list-group-item"><span class="glyphicon glyphicon-edit"></span>Quản lý điểm</a>
+                        <a href="QLD.aspx" class="list-group-item"><span class="glyphicon glyphicon-edit"></span>Quản lý điểm</a>
                     </div>
                 </div>
                 <div class="col-md-9">

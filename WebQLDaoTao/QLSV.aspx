@@ -1,6 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QLSV.aspx.cs" Inherits="WebQLDaoTao.QLSinhvien" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QLSV.aspx.cs" Inherits="WebQLDaoTao.QLSinhVien" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
     <h2>Thiết kế giao diện và chức năng quản lý sinh viên</h2>
       <!-- Trigger the modal with a button -->

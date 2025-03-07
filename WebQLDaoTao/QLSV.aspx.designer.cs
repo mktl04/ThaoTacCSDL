@@ -11,7 +11,7 @@ namespace WebQLDaoTao
 {
 
 
-    public partial class QLSinhvien
+    public partial class QLSinhVien
     {
 
         /// <summary>

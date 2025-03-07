@@ -1,5 +1,6 @@
-﻿﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QLK.aspx.cs" Inherits="WebQLDaoTao.QLKhoa" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="QLK.aspx.cs" Inherits="WebQLDaoTao.QLKhoa" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
     <h3>Giao diện trang quản lý khoa</h3>
      <!-- Trigger the modal with a button -->
@@ -21,7 +22,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="txtTenMon" class="col-sm-2 col-form-label">Tên khoa</label>
+                        <label for="txtTenKH" class="col-sm-2 col-form-label">Tên khoa</label>
                         <div class="col-sm-6">
                             <asp:TextBox ID="txtTenKH" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>

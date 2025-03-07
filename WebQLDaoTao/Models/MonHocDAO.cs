@@ -65,5 +65,6 @@ namespace WebQLDaoTao.Models
             return cmd.ExecuteNonQuery();
         }
         //Lấy môn học theo mã môn học
+
     }
 }
